@@ -64,13 +64,13 @@ const FirstBlock = ({ position = [0, 0, 0] }) => {
 };
 
 const LastBlock = ({ position = [0, 0, 0] }) => {
-  const trophy = useGLTF("/game/trophy/scene.gltf");
+  const trophy = useGLTF("/marble-race/trophy/scene.gltf");
 
   return (
     <group position={position}>
 
       <Text
-        font="/game/fonts/Nunito-ExtraLight.ttf"
+        font="/marble-race/fonts/Nunito-ExtraLight.ttf"
         scale={0.8}
         lineHeight={0.75}
         position={[0, 2.45, 0]}
