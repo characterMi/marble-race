@@ -13,7 +13,7 @@ const Loader = () => {
   const { progress } = useProgress();
   return (
     <Html>
-      <span>{progress.toFixed(2)}%</span>
+      <span style={{ color: "#fff" }}>{progress.toFixed(2)}%</span>
     </Html>
   );
 };
