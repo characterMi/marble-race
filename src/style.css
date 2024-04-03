@@ -24,10 +24,10 @@
   font-family: "Nunito", cursive;
 }
 
-.interface .level-display {
+.interface .level-display,
+.interface .restart-btn {
   position: absolute;
   top: 1rem;
-  left: 2rem;
   background: #ffffff44;
   padding: 0.5rem;
   color: white;
@@ -39,8 +39,16 @@
   transition: all 100ms ease-in-out;
 }
 
+.interface .level-display {
+  left: 2rem;
+}
+
+.interface .restart-btn {
+  right: 2rem;
+}
+
 .interface .level-display:active {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .interface .timer {
@@ -77,7 +85,7 @@
 
 .interface .events .event-items {
   border: 2px solid #ffffff86;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   background: #ffffff44;
   border-radius: 5px;
   transition: all 100ms ease-in-out;
@@ -89,15 +97,17 @@
 }
 
 .interface .events .event-items:active {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .interface .controls {
   position: absolute;
   width: 100%;
-  bottom: 10%;
+  bottom: 5%;
   left: 0;
-  transform: translateY(10%);
+  transform: translateY(5%);
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 .interface .controls .raw {
@@ -106,17 +116,37 @@
 }
 
 .interface .controls .key {
-  width: 40px;
-  height: 40px;
-  margin: 4px;
+  width: 60px;
+  height: 60px;
+  margin: 8px;
   border: 2px solid white;
   background: #ffffff44;
 }
 
 .interface .controls .key.large {
-  width: 144px;
+  width: 216px;
 }
 
 .interface .controls .key.active {
   background: #ffffff99;
+}
+
+@media (max-width: 450px) {
+  .interface .level-display {
+    left: 1rem;
+  }
+
+  .interface .restart-btn {
+    right: 1rem;
+  }
+
+  .interface .timer {
+    font-size: 5vh;
+  }
+}
+
+@media (max-width: 340px) {
+  .interface .timer {
+    font-size: 3vh;
+  }
 }

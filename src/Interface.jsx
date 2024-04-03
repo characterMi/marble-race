@@ -16,12 +16,29 @@ export const Interface = () => {
             jump: state.jump,
         }));
 
-    const { phase, restartGame, level, setLevel } =
+    const {
+        phase,
+        restartGame,
+        level,
+        setLevel,
+        setActiveBtn,
+        forwardBtn,
+        backwardBtn,
+        leftwardBtn,
+        rightwardBtn,
+        jumpBtn,
+    } =
         useGame(state => ({
             phase: state.phase,
             restartGame: state.restart,
             level: state.level,
             setLevel: state.setLevel,
+            setActiveBtn: state.setActiveBtn,
+            forwardBtn: state.forwardBtn,
+            backwardBtn: state.backwardBtn,
+            leftwardBtn: state.leftwardBtn,
+            rightwardBtn: state.rightwardBtn,
+            jumpBtn: state.jumpBtn,
         }))
 
     const handleClick = () => {
@@ -29,6 +46,11 @@ export const Interface = () => {
 
         setLevel()
 
+        restartGame()
+    }
+
+    const handleRestart = () => {
+        setActiveBtn("none")
         restartGame()
     }
 
@@ -67,8 +89,7 @@ export const Interface = () => {
 
             {/* Restart */}
             <span
-                className="level-display"
-                style={{ right: "2rem", left: "unset", border: "none" }}
+                className="restart-btn"
                 onClick={restartGame}
             >
                 Restart
@@ -82,7 +103,7 @@ export const Interface = () => {
             {/* Restart */}
             {phase === "ended" && (
                 <div className="events">
-                    <div onClick={phase === "ended" ? restartGame : () => { }} className="event-items">Restart</div>
+                    <div onClick={phase === "ended" ? handleRestart : () => { }} className="event-items">Restart</div>
                     <div onClick={phase === "ended" ? handleClick : () => { }} className="event-items">{level == 15 ? "Start again" : "Next"}</div>
                 </div>
             )}
@@ -90,15 +111,35 @@ export const Interface = () => {
             {/* Controls */}
             <div className="controls">
                 <div className="raw">
-                    <div className={`key ${forward && "active"}`}></div>
+                    <div
+                        onMouseOver={() => setActiveBtn("forwardActive")}
+                        onMouseOut={() => setActiveBtn("forwardBreak")}
+                        className={`key ${(forward || forwardBtn) && "active"}`}
+                    />
                 </div>
                 <div className="raw">
-                    <div className={`key ${leftward && "active"}`}></div>
-                    <div className={`key ${backward && "active"}`}></div>
-                    <div className={`key ${rightward && "active"}`}></div>
+                    <div
+                        onMouseOver={() => setActiveBtn("leftwardActive")}
+                        onMouseOut={() => setActiveBtn("leftwardBreak")}
+                        className={`key ${(leftward || leftwardBtn) && "active"}`}
+                    />
+                    <div
+                        onMouseOver={() => setActiveBtn("backwardActive")}
+                        onMouseOut={() => setActiveBtn("backwardBreak")}
+                        className={`key ${(backward || backwardBtn) && "active"}`}
+                    />
+                    <div
+                        onMouseOver={() => setActiveBtn("rightwardActive")}
+                        onMouseOut={() => setActiveBtn("rightwardBreak")}
+                        className={`key ${(rightward || rightwardBtn) && "active"}`}
+                    />
                 </div>
                 <div className="raw">
-                    <div className={`key large ${jump && "active"}`}></div>
+                    <div
+                        onMouseOver={() => setActiveBtn("jumpActive")}
+                        onMouseOut={() => setActiveBtn("jumpBreak")}
+                        className={`key large ${(jump || jumpBtn) && "active"}`}
+                    />
                 </div>
             </div>
         </div>

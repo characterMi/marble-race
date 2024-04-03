@@ -1,15 +1,15 @@
-import { Float, MeshReflectorMaterial, Text, useGLTF } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { CuboidCollider, RigidBody } from "@react-three/rapier";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
+import { useFrame } from "@react-three/fiber";
+import { Float, Text, useGLTF } from "@react-three/drei";
+import { CuboidCollider, RigidBody } from "@react-three/rapier";
 
 THREE.ColorManagement.legacyMode = false;
 
 const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
 
 const firstFloorMaterial = new THREE.MeshStandardMaterial({
-  color: "#DDD",
+  color: "#DDDDDD",
   roughness: 0,
   metalness: 0,
 });
@@ -35,6 +35,23 @@ Blocks
 ////////////////////////////////////////////
 */
 const FirstBlock = ({ position = [0, 0, 0] }) => {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    setIsMobile(mediaQuery.matches);
+
+    const handleMediaQueryChange = (e) => {
+      setIsMobile(e.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaQueryChange);
+    };
+  }, []);
+
   return (
     <group position={position}>
 
@@ -44,7 +61,7 @@ const FirstBlock = ({ position = [0, 0, 0] }) => {
           maxWidth={0.25}
           lineHeight={0.75}
           textAlign="right"
-          position={[0.75, 0.65, 0]}
+          position={isMobile ? [0.5, 1, -2.1] : [0.75, 0.65, 0]}
           rotation-y={-0.25}
         >
           MARBLE RACE

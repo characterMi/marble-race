@@ -32,5 +32,59 @@ export const useGame = create(
 
         return {};
       }),
+
+    /**
+     * Responsiveness
+     */
+
+    forwardBtn: false,
+    backwardBtn: false,
+    leftwardBtn: false,
+    rightwardBtn: false,
+    jumpBtn: false,
+
+    setActiveBtn: (key) => {
+      switch (key) {
+        case "forwardActive":
+          setState({ forwardBtn: true });
+          break;
+        case "backwardActive":
+          setState({ backwardBtn: true });
+          break;
+        case "leftwardActive":
+          setState({ leftwardBtn: true });
+          break;
+        case "rightwardActive":
+          setState({ rightwardBtn: true });
+          break;
+        case "jumpActive":
+          setState({ jumpBtn: true });
+          break;
+        case "forwardBreak":
+          setState({ forwardBtn: false });
+          break;
+        case "backwardBreak":
+          setState({ backwardBtn: false });
+          break;
+        case "leftwardBreak":
+          setState({ leftwardBtn: false });
+          break;
+        case "rightwardBreak":
+          setState({ rightwardBtn: false });
+          break;
+        case "jumpBreak":
+          setState({ jumpBtn: false });
+          break;
+        case "none":
+          setState({
+            forwardBtn: false,
+            backwardBtn: false,
+            leftwardBtn: false,
+            rightwardBtn: false,
+            jumpBtn: false,
+          });
+          break;
+      }
+    },
   }))
 );

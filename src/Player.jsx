@@ -13,10 +13,27 @@ export const Player = () => {
   const [smoothedCameraPosition] = useState(() => new THREE.Vector3(10, 10, 10));
   const [smoothedCameraTarget] = useState(() => new THREE.Vector3());
 
-  const startGame = useGame(state => state.start)
-  const endGame = useGame(state => state.end)
-  const restartGame = useGame(state => state.restart)
-  const blocksCount = useGame(state => state.level * 5 /* we already know that for each level we add 5 blocks. so to get blocks count, we multiply the level to 5 */);
+  const {
+    startGame,
+    endGame,
+    restartGame,
+    blocksCount,
+    forwardBtn,
+    backwardBtn,
+    leftwardBtn,
+    rightwardBtn,
+    setActiveBtn,
+  } = useGame(state => ({
+    startGame: state.start,
+    endGame: state.end,
+    restartGame: state.restart,
+    blocksCount: state.level * 5, /* we already know that for each level we add 5 blocks. so to get blocks count, we multiply the level to 5 */
+    forwardBtn: state.forwardBtn,
+    backwardBtn: state.backwardBtn,
+    leftwardBtn: state.leftwardBtn,
+    rightwardBtn: state.rightwardBtn,
+    setActiveBtn: state.setActiveBtn,
+  }))
 
   const resetGame = () => {
     body.current.setTranslation({ x: 0, y: 1, z: 0 });
@@ -42,18 +59,34 @@ export const Player = () => {
       },
     )
 
-
     const unsubscribeJump = subscribeKeys(
       (state) => state.jump,
       (jump) => jump && jumpHandler()
     );
 
+    const unsubscribeJumpBtn = useGame.subscribe(
+      (state) => state.jumpBtn,
+      (jump) => jump && jumpHandler()
+    );
+
     const unsubscribeAny = subscribeKeys(() => startGame())
+
+    const unsubscribeAnyBtn = useGame.subscribe(
+      (state) => ({
+        f: state.forwardBtn,
+        b: state.backwardBtn,
+        l: state.leftwardBtn,
+        r: state.rightwardBtn,
+      }),
+      ({ f, b, l, r }) => (f || b || l || r) && startGame(),
+    )
 
     return () => {
       unsubscribeReset();
       unsubscribeJump();
+      unsubscribeJumpBtn();
       unsubscribeAny();
+      unsubscribeAnyBtn();
     };
   }, []);
 
@@ -70,16 +103,16 @@ export const Player = () => {
     const impulseStrength = 0.6 * delta;
     const torqueStrength = 0.2 * delta;
 
-    if (forward) {
+    if (forward || forwardBtn) {
       impulse.z -= impulseStrength;
       torque.x -= torqueStrength;
-    } else if (rightward) {
+    } else if (rightward || rightwardBtn) {
       impulse.x += impulseStrength;
       torque.z -= torqueStrength;
-    } else if (backward) {
+    } else if (backward || backwardBtn) {
       impulse.z += impulseStrength;
       torque.x += torqueStrength;
-    } else if (leftward) {
+    } else if (leftward || leftwardBtn) {
       impulse.x -= impulseStrength;
       torque.z += torqueStrength;
     }
@@ -96,7 +129,7 @@ export const Player = () => {
     const cameraPosition = new THREE.Vector3();
     cameraPosition.copy(bodyPosition);
 
-    cameraPosition.z += 2.5;
+    cameraPosition.z += 3.5;
     cameraPosition.y += 0.95;
 
     const cameraTarget = new THREE.Vector3();
@@ -114,9 +147,15 @@ export const Player = () => {
      * Phases
      */
 
-    if (bodyPosition.z < -(blocksCount * 4 + 2)) endGame()
+    if (bodyPosition.z < -(blocksCount * 4 + 2)) {
+      setActiveBtn("none")
+      endGame()
+    }
 
-    if (bodyPosition.y < -10) restartGame()
+    if (bodyPosition.y < -10) {
+      setActiveBtn("none")
+      restartGame()
+    }
   });
 
   return (
