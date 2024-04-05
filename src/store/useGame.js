@@ -3,7 +3,7 @@ import { subscribeWithSelector } from "zustand/middleware";
 
 export const useGame = create(
   subscribeWithSelector((setState) => ({
-    level: 3,
+    level: 1,
     setLevel: () => setState({ level: localStorage.getItem("level") }),
     phase: "ready",
     startTime: 0,

@@ -6,12 +6,33 @@
 * {
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .canvas {
   width: 100vw;
   height: 100vh;
   background: #18181b;
+}
+
+.loader {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  background: #18181b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  font-family: "Nunito";
+  color: #ffffff;
+}
+
+.loader span {
+  font-weight: bolder;
 }
 
 .interface {
@@ -100,6 +121,42 @@
   opacity: 0.5;
 }
 
+.interface .how-to__container {
+  background: #ffffff44;
+  position: fixed;
+  top: 30%;
+  left: 0;
+  transform: translate(-100%, 20%);
+  width: 300px;
+  color: #ffffff;
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
+  border-radius: 0 10px 10px 0;
+  border: 2px solid #ffffff;
+  border-left: none;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  transition: all 200ms ease-in-out;
+}
+
+.interface .how-to__container .toggle-button {
+  position: absolute;
+  transform: translateX(calc(100% + 2rem));
+  padding: 0.5rem 2rem;
+  font-size: 3rem;
+  background: #ffffff44;
+  border-radius: 0 10px 10px 0;
+  border: 2px solid #ffffff;
+  border-left: none;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.interface .how-to__container.active {
+  transform: translate(0, 20%);
+}
+
 .interface .controls {
   position: absolute;
   width: 100%;
@@ -109,7 +166,6 @@
   pointer-events: auto;
   cursor: pointer;
   background: transparent;
-  -webkit-tap-highlight-color: transparent;
 }
 
 .interface .controls .raw {
@@ -133,7 +189,7 @@
   background: #ffffff99;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 480px) {
   .interface .level-display {
     left: 1rem;
   }
@@ -144,6 +200,18 @@
 
   .interface .timer {
     font-size: 5vh;
+  }
+  .interface .how-to__container {
+    width: 200px;
+    font-size: 1rem;
+    padding: 1rem;
+  }
+
+  .interface .how-to__container .toggle-button {
+    transform: translateX(calc(100% + 1rem));
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;
+    border-radius: 0 5px 5px 0;
   }
 }
 

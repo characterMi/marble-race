@@ -106,13 +106,19 @@ export const Player = () => {
     if (forward || forwardBtn) {
       impulse.z -= impulseStrength;
       torque.x -= torqueStrength;
-    } else if (rightward || rightwardBtn) {
+    }
+
+    if (rightward || rightwardBtn) {
       impulse.x += impulseStrength;
       torque.z -= torqueStrength;
-    } else if (backward || backwardBtn) {
+    }
+
+    if (backward || backwardBtn) {
       impulse.z += impulseStrength;
       torque.x += torqueStrength;
-    } else if (leftward || leftwardBtn) {
+    }
+    
+    if (leftward || leftwardBtn) {
       impulse.x -= impulseStrength;
       torque.z += torqueStrength;
     }

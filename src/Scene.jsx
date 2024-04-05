@@ -13,7 +13,10 @@ const Loader = () => {
   const { progress } = useProgress();
   return (
     <Html>
-      <span style={{ color: "#fff" }}>{progress.toFixed(2)}%</span>
+      <section className="loader">
+        <h1>Loading the Level...</h1>
+        <span>{progress.toFixed(2)}%</span>
+      </section>
     </Html>
   );
 };
@@ -21,7 +24,7 @@ const Loader = () => {
 const Scene = () => {
   const level = useGame(state => state.level)
   const setLevel = useGame(state => state.setLevel)
-
+  
   useEffect(() => {
     if (!localStorage.getItem('level')) {
       localStorage.setItem('level', 1)

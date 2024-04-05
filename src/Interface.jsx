@@ -1,11 +1,13 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { addEffect } from "@react-three/fiber";
 import { useKeyboardControls } from "@react-three/drei";
 
 import { useGame } from "./store/useGame"
 
 export const Interface = () => {
-    const timeRef = useRef()
+    const timeRef = useRef();
+
+    const [isHowToSectionActive, setIsHowToSectionActive] = useState(false)
 
     const { forward, backward, leftward, rightward, jump } =
         useKeyboardControls((state) => ({
@@ -20,7 +22,6 @@ export const Interface = () => {
         phase,
         restartGame,
         level,
-        setLevel,
         setActiveBtn,
         forwardBtn,
         backwardBtn,
@@ -32,7 +33,6 @@ export const Interface = () => {
             phase: state.phase,
             restartGame: state.restart,
             level: state.level,
-            setLevel: state.setLevel,
             setActiveBtn: state.setActiveBtn,
             forwardBtn: state.forwardBtn,
             backwardBtn: state.backwardBtn,
@@ -44,7 +44,7 @@ export const Interface = () => {
     const handleClick = () => {
         localStorage.setItem("level", +level + 1);
 
-        setLevel()
+        window.location.reload()
 
         restartGame()
     }
@@ -107,6 +107,15 @@ export const Interface = () => {
                     <div onClick={phase === "ended" ? handleClick : () => { }} className="event-items">{level == 15 ? "Start again" : "Next"}</div>
                 </div>
             )}
+
+            {/* How to play? */}
+            <div className={`how-to__container ${isHowToSectionActive && "active"}`}>
+                <div className="toggle-button" onClick={() => setIsHowToSectionActive(prev => !prev)}>?</div>
+                <div>
+                    Use the W, S, D, A or the control buttons down below to play. you can also use arrow keys to play.
+                    there is some bugs in the game, so if the ball doesn&apos;t move, simply restart the game.
+                </div>
+            </div>
 
             {/* Controls */}
             <div className="controls">
