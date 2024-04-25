@@ -1,11 +1,11 @@
-import { Suspense, useEffect } from "react";
-import { Canvas } from "@react-three/fiber";
 import { Html, KeyboardControls, Stars, useProgress } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
-import { Lights } from "./Lights";
-import { Level } from "./Level";
-import { Player } from "./Player";
+import { Suspense, useEffect } from "react";
 import { Interface } from "./Interface";
+import { Level } from "./Level";
+import { Lights } from "./Lights";
+import { Player } from "./Player";
 
 import { useGame } from "./store/useGame";
 
@@ -24,7 +24,7 @@ const Loader = () => {
 const Scene = () => {
   const level = useGame(state => state.level)
   const setLevel = useGame(state => state.setLevel)
-  
+
   useEffect(() => {
     if (!localStorage.getItem('level')) {
       localStorage.setItem('level', 1)

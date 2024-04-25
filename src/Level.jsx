@@ -1,8 +1,8 @@
+import { Float, Text, useGLTF } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { CuboidCollider, RigidBody } from "@react-three/rapier";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
-import { useFrame } from "@react-three/fiber";
-import { Float, Text, useGLTF } from "@react-three/drei";
-import { CuboidCollider, RigidBody } from "@react-three/rapier";
 
 THREE.ColorManagement.legacyMode = false;
 

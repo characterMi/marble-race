@@ -1,8 +1,8 @@
-import { useRef, useEffect, useState } from "react";
-import { addEffect } from "@react-three/fiber";
 import { useKeyboardControls } from "@react-three/drei";
+import { addEffect } from "@react-three/fiber";
+import { useEffect, useRef, useState } from "react";
 
-import { useGame } from "./store/useGame"
+import { useGame } from "./store/useGame";
 
 export const Interface = () => {
     const timeRef = useRef();
