@@ -7,7 +7,7 @@ import { useGame } from "./store/useGame";
 export const Interface = () => {
     const timeRef = useRef();
 
-    const [isHowToSectionActive, setIsHowToSectionActive] = useState(false)
+    const [isHowToSectionActive, setIsHowToSectionActive] = useState(false);
 
     const { forward, backward, leftward, rightward, jump } =
         useKeyboardControls((state) => ({
@@ -45,8 +45,6 @@ export const Interface = () => {
         localStorage.setItem("level", +level + 1);
 
         window.location.reload()
-
-        restartGame()
     }
 
     const handleRestart = () => {
@@ -73,10 +71,10 @@ export const Interface = () => {
             elapsedTime = elapsedTime.toString().replace(".", " : ")
 
             if (timeRef.current) timeRef.current.textContent = elapsedTime
-        })
+        });
 
         return () => {
-            unsubscribeEffect()
+            unsubscribeEffect();
         }
     }, [])
 
@@ -113,7 +111,9 @@ export const Interface = () => {
                 <div className="toggle-button" onClick={() => setIsHowToSectionActive(prev => !prev)}>?</div>
                 <div>
                     Use the W, S, D, A or the control buttons down below to play. you can also use arrow keys to play.
-                    there is some bugs in the game, so if the ball doesn&apos;t move, simply restart the game.
+                    there is some bugs in the game, so if the ball doesn&apos;t move, simply restart the game. You can also download the game.
+
+                    <button className="download-btn" onClick={() => alert(`To install the app look for "Add to Homescreen" or install in your browser's menu.`)}>Download Game</button>
                 </div>
             </div>
 

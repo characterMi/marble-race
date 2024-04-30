@@ -1,10 +1,10 @@
+import { useKeyboardControls } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { RigidBody, useRapier } from "@react-three/rapier";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import { useFrame } from "@react-three/fiber";
-import { useKeyboardControls } from "@react-three/drei";
-import { RigidBody, useRapier } from "@react-three/rapier";
 
-import { useGame } from "./store/useGame"
+import { useGame } from "./store/useGame";
 
 export const Player = () => {
   const [subscribeKeys, getKeys] = useKeyboardControls();
@@ -117,7 +117,7 @@ export const Player = () => {
       impulse.z += impulseStrength;
       torque.x += torqueStrength;
     }
-    
+
     if (leftward || leftwardBtn) {
       impulse.x -= impulseStrength;
       torque.z += torqueStrength;

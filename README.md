@@ -38,4 +38,7 @@
     <li>
         <img src="https://github.com/characterMi/characterMi/blob/main/images/technologies/threeJs-icon.png" width="46" height="46" alt="Three.js" />
     </li>
+    <li>
+        <img src="https://github.com/characterMi/characterMi/blob/main/images/technologies/pwa.png" width="46" height="46" alt="PWA" />
+    </li>
 </ul>

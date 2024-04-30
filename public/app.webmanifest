@@ -1,0 +1,38 @@
+{
+  "name": "Marble Race Game",
+  "short_name": "Marble Race",
+  "description": "Marble Race is a web-based game created using Three.js, offering an exhilarating experience in the genre of adventure and challenging games.",
+  "start_url": ".",
+  "orientation": "portrait",
+  "theme_color": "#9370d8",
+  "scope": ".",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "/marble-race/icons/marble-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/marble-race/icons/marble-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "background_color": "#18181b",
+  "screenshots": [
+    {
+      "src": "/marble-race/images/marble-race_first.png",
+      "sizes": "800x500",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/marble-race/images/marble-race_responsive.png",
+      "sizes": "380x820",
+      "type": "image/png"
+    }
+  ]
+}

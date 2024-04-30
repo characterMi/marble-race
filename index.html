@@ -2,11 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#9370d8" />
     <title>3D Game - Marble Race</title>
+    <meta
+      name="description"
+      content="Marble Race is a web-based game created using Three.js, offering an exhilarating experience in the genre of adventure and challenging games."
+    />
+    <link rel="icon" href="/marble-race/icons/icon.svg" type="image/svg" />
+    <link rel="apple-touch-icon" href="/marble-race/icons/marble-192.png" />
+    <!-- /marble-race -->
+    <link rel="manifest" href="/app.webmanifest" />
   </head>
   <body>
     <main id="root"></main>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            // marble-race
+            .register("/serviceWorker.js")
+            .then((res) => {
+              console.log("Serviceworker Started.");
+            })
+            .catch((error) => console.error("an Error has been occurred!"));
+        });
+      }
+    </script>
   </body>
 </html>
