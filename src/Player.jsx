@@ -72,13 +72,8 @@ export const Player = () => {
     const unsubscribeAny = subscribeKeys(() => startGame())
 
     const unsubscribeAnyBtn = useGame.subscribe(
-      (state) => ({
-        f: state.forwardBtn,
-        b: state.backwardBtn,
-        l: state.leftwardBtn,
-        r: state.rightwardBtn,
-      }),
-      ({ f, b, l, r }) => (f || b || l || r) && startGame(),
+      (state) => [state.forwardBtn, state.backwardBtn, state.leftwardBtn, state.rightwardBt],
+      ([f, b, l, r]) => (f || b || l || r) && startGame(),
     )
 
     return () => {
@@ -88,7 +83,7 @@ export const Player = () => {
       unsubscribeAny();
       unsubscribeAnyBtn();
     };
-  }, []);
+  }, [subscribeKeys, jumpHandler, startGame]);
 
   useFrame((state, delta) => {
     /**
@@ -122,6 +117,8 @@ export const Player = () => {
       impulse.x -= impulseStrength;
       torque.z += torqueStrength;
     }
+
+    // console.log(body.current);
 
     body.current.applyImpulse(impulse);
     body.current.applyTorqueImpulse(torque);

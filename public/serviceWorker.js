@@ -1,6 +1,8 @@
 const assets = [
   "/marble-race",
   "/marble-race/trophy/scene.gltf",
+  "/marble-race/trophy/scene.bin",
+  "/marble-race/trophy/textures/Object001_mtl_baseColor.jpeg",
   "/marble-race/fonts/Nunito-ExtraLight.ttf",
 ];
 

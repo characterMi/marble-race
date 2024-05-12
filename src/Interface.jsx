@@ -111,7 +111,7 @@ export const Interface = () => {
                 <div className="toggle-button" onClick={() => setIsHowToSectionActive(prev => !prev)}>?</div>
                 <div>
                     Use the W, S, D, A or the control buttons down below to play. you can also use arrow keys to play.
-                    there is some bugs in the game, so if the ball doesn&apos;t move, simply restart the game. You can also download the game.
+                    if the ball doesn&apos;t move, simply restart the game. You can also download the game.
 
                     <button className="download-btn" onClick={() => alert(`To install the app look for "Add to Homescreen" or install in your browser's menu.`)}>Download Game</button>
                 </div>
@@ -121,32 +121,32 @@ export const Interface = () => {
             <div className="controls">
                 <div className="raw">
                     <div
-                        onMouseOver={() => setActiveBtn("forwardActive")}
-                        onMouseOut={() => setActiveBtn("forwardBreak")}
+                        onTouchStart={() => setActiveBtn("forwardActive")}
+                        onTouchEnd={() => setActiveBtn("forwardBreak")}
                         className={`key ${(forward || forwardBtn) && "active"}`}
                     />
                 </div>
                 <div className="raw">
                     <div
-                        onMouseOver={() => setActiveBtn("leftwardActive")}
-                        onMouseOut={() => setActiveBtn("leftwardBreak")}
+                        onTouchStart={() => setActiveBtn("leftwardActive")}
+                        onTouchEnd={() => setActiveBtn("leftwardBreak")}
                         className={`key ${(leftward || leftwardBtn) && "active"}`}
                     />
                     <div
-                        onMouseOver={() => setActiveBtn("backwardActive")}
-                        onMouseOut={() => setActiveBtn("backwardBreak")}
+                        onTouchStart={() => setActiveBtn("backwardActive")}
+                        onTouchEnd={() => setActiveBtn("backwardBreak")}
                         className={`key ${(backward || backwardBtn) && "active"}`}
                     />
                     <div
-                        onMouseOver={() => setActiveBtn("rightwardActive")}
-                        onMouseOut={() => setActiveBtn("rightwardBreak")}
+                        onTouchStart={() => setActiveBtn("rightwardActive")}
+                        onTouchEnd={() => setActiveBtn("rightwardBreak")}
                         className={`key ${(rightward || rightwardBtn) && "active"}`}
                     />
                 </div>
                 <div className="raw">
                     <div
-                        onMouseOver={() => setActiveBtn("jumpActive")}
-                        onMouseOut={() => setActiveBtn("jumpBreak")}
+                        onTouchStart={() => setActiveBtn("jumpActive")}
+                        onTouchEnd={() => setActiveBtn("jumpBreak")}
                         className={`key large ${(jump || jumpBtn) && "active"}`}
                     />
                 </div>
