@@ -14,24 +14,28 @@
     />
     <link rel="icon" href="/marble-race/icons/icon.svg" type="image/svg" />
     <link rel="apple-touch-icon" href="/marble-race/icons/marble-192.png" />
-    <!-- /marble-race -->
     <link rel="manifest" href="/marble-race/app.webmanifest" />
-    <script type="module" crossorigin src="/marble-race/assets/index-0ad0f83c.js"></script>
-    <link rel="stylesheet" href="/marble-race/assets/index-71fa28c1.css">
+    <script
+      type="module"
+      crossorigin
+      src="/marble-race/assets/index-0ad0f83c.js"
+    ></script>
+    <link rel="stylesheet" href="/marble-race/assets/index-71fa28c1.css" />
   </head>
   <body>
     <main id="root"></main>
-    
+
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
           navigator.serviceWorker
-            // marble-race
-            .register("/serviceWorker.js")
+            .register("/marble-race/serviceWorker.js")
             .then((res) => {
               console.log("Serviceworker Started.");
             })
-            .catch((error) => console.error("an Error has been occurred!"));
+            .catch((error) =>
+              console.error("an Error has been occurred! => ", error)
+            );
         });
       }
     </script>
