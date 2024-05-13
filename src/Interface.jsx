@@ -8,6 +8,7 @@ export const Interface = () => {
     const timeRef = useRef();
 
     const [isHowToSectionActive, setIsHowToSectionActive] = useState(false);
+    const [bipEvent, setBipEvent] = useState(null)
 
     const { forward, backward, leftward, rightward, jump } =
         useKeyboardControls((state) => ({
@@ -52,6 +53,16 @@ export const Interface = () => {
         restartGame()
     }
 
+    const handleDownload = () => {
+        if (bipEvent) {
+            bipEvent.prompt()
+        } else {
+            alert(`To install the app look for "Add to Homescreen" or install in your browser's menu.`)
+        }
+    }
+
+    const handleSetInstallPrompt = (event) => setBipEvent(event)
+
     useEffect(() => {
         const unsubscribeEffect = addEffect(() => {
             const state = useGame.getState()
@@ -73,8 +84,11 @@ export const Interface = () => {
             if (timeRef.current) timeRef.current.textContent = elapsedTime
         });
 
+        window.addEventListener("beforeinstallprompt", handleSetInstallPrompt)
+
         return () => {
             unsubscribeEffect();
+            window.removeEventListener("beforeinstallprompt", handleSetInstallPrompt)
         }
     }, [])
 
@@ -113,7 +127,7 @@ export const Interface = () => {
                     Use the W, S, D, A or the control buttons down below to play. you can also use arrow keys to play.
                     if the ball doesn&apos;t move, simply restart the game. You can also download the game.
 
-                    <button className="download-btn" onClick={() => alert(`To install the app look for "Add to Homescreen" or install in your browser's menu.`)}>Download Game</button>
+                    <button className="download-btn" onClick={handleDownload}>Download Game</button>
                 </div>
             </div>
 

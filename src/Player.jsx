@@ -8,7 +8,7 @@ import { useGame } from "./store/useGame";
 
 export const Player = () => {
   const [subscribeKeys, getKeys] = useKeyboardControls();
-  const body = useRef();
+  const body = useRef(null);
   const { rapier, world } = useRapier();
   const [smoothedCameraPosition] = useState(() => new THREE.Vector3(10, 10, 10));
   const [smoothedCameraTarget] = useState(() => new THREE.Vector3());
@@ -66,14 +66,34 @@ export const Player = () => {
 
     const unsubscribeJumpBtn = useGame.subscribe(
       (state) => state.jumpBtn,
-      (jump) => jump && jumpHandler()
+      (jump) => {
+        if (jump) {
+          jumpHandler()
+          startGame()
+        }
+      }
     );
 
     const unsubscribeAny = subscribeKeys(() => startGame())
 
-    const unsubscribeAnyBtn = useGame.subscribe(
-      (state) => [state.forwardBtn, state.backwardBtn, state.leftwardBtn, state.rightwardBt],
-      ([f, b, l, r]) => (f || b || l || r) && startGame(),
+    const unsubscribeForwardBtn = useGame.subscribe(
+      (state) => state.forwardBtn,
+      (f) => f && startGame(),
+    )
+
+    const unsubscribeBackwardBtn = useGame.subscribe(
+      (state) => state.backwardBtn,
+      (b) => b && startGame(),
+    )
+
+    const unsubscribeLeftwardBtn = useGame.subscribe(
+      (state) => state.leftwardBtn,
+      (l) => l && startGame(),
+    )
+
+    const unsubscribeRightwardBtn = useGame.subscribe(
+      (state) => state.rightwardBtn,
+      (r) => r && startGame(),
     )
 
     return () => {
@@ -81,14 +101,17 @@ export const Player = () => {
       unsubscribeJump();
       unsubscribeJumpBtn();
       unsubscribeAny();
-      unsubscribeAnyBtn();
+      unsubscribeForwardBtn();
+      unsubscribeBackwardBtn();
+      unsubscribeLeftwardBtn();
+      unsubscribeRightwardBtn();
     };
-  }, [subscribeKeys, jumpHandler, startGame]);
+  }, []);
 
   useFrame((state, delta) => {
     /**
-     * Controls
-     */
+   * Controls
+   */
 
     const { forward, backward, leftward, rightward } = getKeys();
 
@@ -117,8 +140,6 @@ export const Player = () => {
       impulse.x -= impulseStrength;
       torque.z += torqueStrength;
     }
-
-    // console.log(body.current);
 
     body.current.applyImpulse(impulse);
     body.current.applyTorqueImpulse(torque);
