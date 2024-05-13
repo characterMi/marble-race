@@ -48,6 +48,12 @@ export const Interface = () => {
         window.location.reload()
     }
 
+    const handleSelectLevel = (level) => {
+        localStorage.setItem("level", level.toString());
+
+        window.location.reload()
+    }
+
     const handleRestart = () => {
         setActiveBtn("none")
         restartGame()
@@ -97,7 +103,18 @@ export const Interface = () => {
         <div className="interface">
 
             {/* Level */}
-            <span className="level-display">Level: {level}</span>
+            <select className="level-display" onChange={(e) => handleSelectLevel(e.target.value)}>
+                {[...Array(15).keys()].map((index) => (
+                    <option
+                        value={index + 1}
+                        key={index + 1}
+                        selected={(index + 1) === +level}
+                    >
+                        Level: {index + 1}
+                    </option>
+                )
+                )}
+            </select>
 
             {/* Restart */}
             <span

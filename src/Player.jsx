@@ -172,8 +172,9 @@ export const Player = () => {
      */
 
     if (bodyPosition.z < -(blocksCount * 4 + 2)) {
-      setActiveBtn("none")
-      endGame()
+      setActiveBtn("none");
+
+      endGame();
     }
 
     if (bodyPosition.y < -10) {

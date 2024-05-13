@@ -66,6 +66,10 @@
   left: 2rem;
 }
 
+.interface .level-display option {
+  color: #18181b;
+}
+
 .interface .restart-btn {
   right: 2rem;
 }
@@ -92,6 +96,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   gap: 2rem;
   position: absolute;
   top: 50%;
