@@ -2,7 +2,7 @@ import { useKeyboardControls } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { RigidBody, useRapier } from "@react-three/rapier";
 import { useEffect, useRef, useState } from "react";
-import * as THREE from "three";
+import { Vector3 } from "three";
 
 import { useGame } from "./store/useGame";
 
@@ -10,8 +10,8 @@ export const Player = () => {
   const [subscribeKeys, getKeys] = useKeyboardControls();
   const body = useRef(null);
   const { rapier, world } = useRapier();
-  const [smoothedCameraPosition] = useState(() => new THREE.Vector3(10, 10, 10));
-  const [smoothedCameraTarget] = useState(() => new THREE.Vector3());
+  const [smoothedCameraPosition] = useState(() => new Vector3(10, 10, 10));
+  const [smoothedCameraTarget] = useState(() => new Vector3());
 
   const {
     startGame,
@@ -150,13 +150,13 @@ export const Player = () => {
 
     const bodyPosition = body.current.translation();
 
-    const cameraPosition = new THREE.Vector3();
+    const cameraPosition = new Vector3();
     cameraPosition.copy(bodyPosition);
 
     cameraPosition.z += 3.5;
     cameraPosition.y += 0.95;
 
-    const cameraTarget = new THREE.Vector3();
+    const cameraTarget = new Vector3();
     cameraTarget.copy(bodyPosition);
 
     cameraTarget.y += 0.25;
@@ -192,6 +192,8 @@ export const Player = () => {
       ref={body}
       linearDamping={0.5}
       angularDamping={0.5}
+      canSleep={false}
+      onSleep={(e) => e.preventDefault()}
     >
       <mesh castShadow>
         <icosahedronGeometry args={[0.3, 1]} />

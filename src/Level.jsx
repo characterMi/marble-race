@@ -2,28 +2,34 @@ import { Float, Text, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
 import { useEffect, useMemo, useRef, useState } from "react";
-import * as THREE from "three";
+import {
+  BoxGeometry,
+  ColorManagement,
+  Euler,
+  MeshStandardMaterial,
+  Quaternion
+} from "three";
 
-THREE.ColorManagement.legacyMode = false;
+ColorManagement.legacyMode = false;
 
-const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
+const boxGeometry = new BoxGeometry(1, 1, 1);
 
-const firstFloorMaterial = new THREE.MeshStandardMaterial({
+const firstFloorMaterial = new MeshStandardMaterial({
   color: "#DDDDDD",
   roughness: 0,
   metalness: 0,
 });
-const secondFloorMaterial = new THREE.MeshStandardMaterial({
+const secondFloorMaterial = new MeshStandardMaterial({
   color: "#575757",
   roughness: 0,
   metalness: 0,
 });
-const obstacleMaterial = new THREE.MeshStandardMaterial({
+const obstacleMaterial = new MeshStandardMaterial({
   color: "#FF0000",
   roughness: 1,
   metalness: 0,
 });
-const wallMaterial = new THREE.MeshStandardMaterial({
+const wallMaterial = new MeshStandardMaterial({
   color: "#887777",
   roughness: 0,
   metalness: 0,
@@ -132,8 +138,8 @@ const FirstSpinnerTrap = ({ position }) => {
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
 
-    const rotation = new THREE.Quaternion();
-    rotation.setFromEuler(new THREE.Euler(0, time * speed, 0));
+    const rotation = new Quaternion();
+    rotation.setFromEuler(new Euler(0, time * speed, 0));
 
     obstacle.current.setNextKinematicRotation(rotation);
   });
@@ -176,8 +182,8 @@ const SecondSpinnerTrap = ({ position }) => {
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
 
-    const rotation = new THREE.Quaternion();
-    rotation.setFromEuler(new THREE.Euler(1.8, time * speed, 0));
+    const rotation = new Quaternion();
+    rotation.setFromEuler(new Euler(1.8, time * speed, 0));
 
     obstacle.current.setNextKinematicRotation(rotation);
   });
