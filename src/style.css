@@ -18,34 +18,6 @@
   background: #18181b;
 }
 
-.error-section {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 95%;
-  max-width: 320px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  z-index: 1000000000000000000;
-}
-
-.error-section p q {
-  font-weight: bolder;
-}
-
-.error-section button {
-  width: max-content;
-  margin: 0 auto;
-  padding: 10px 25px;
-  outline: none;
-  background: #000000b7;
-  color: white;
-  cursor: pointer;
-  border: none;
-}
-
 .loader {
   width: 100vw;
   height: 100vh;
