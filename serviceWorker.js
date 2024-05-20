@@ -4,9 +4,9 @@ const assets = [
   "/marble-race/trophy/scene.bin",
   "/marble-race/trophy/textures/Object001_mtl_baseColor.jpeg",
   "/marble-race/fonts/Nunito-ExtraLight.ttf",
-  "/marble-race/assets/index-1c824118.js",
-  "/marble-race/assets/index-373c7b80.css",
-  "/marble-race/assets/troika-three-text.esm-4b832f76.js",
+  "/marble-race/assets/index-611290b2.js",
+  "/marble-race/assets/index-a8e4328a.css",
+  "/marble-race/assets/troika-three-text.esm-e26e31b7.js",
 ];
 
 self.addEventListener("install", (e) => {

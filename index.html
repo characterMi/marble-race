@@ -18,14 +18,28 @@
     <script
       type="module"
       crossorigin
-      src="/marble-race/assets/index-1c824118.js"
+      src="/marble-race/assets/index-611290b2.js"
     ></script>
-    <link rel="stylesheet" href="/marble-race/assets/index-373c7b80.css" />
+    <link rel="stylesheet" href="/marble-race/assets/index-a8e4328a.css" />
   </head>
   <body>
     <main id="root"></main>
+    <section class="error-section"></section>
 
     <script>
+      const errorHeading = document.querySelector(".error-section");
+
+      window.addEventListener("error", () => {
+        errorHeading.innerHTML = `
+          <h1>Sorry, something went wrong! </h1>
+          <p>this error might be caused by service worker.</p>
+          <p><q>Reload</q> the page to fix this issue.</p>
+          <button onclick="window.location.reload()">
+            Reload
+          </button>
+        `;
+      });
+
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
           navigator.serviceWorker
