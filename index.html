@@ -22,17 +22,17 @@
 
     <script type="module" src="/src/main.jsx"></script>
     <script>
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-          navigator.serviceWorker
-            // marble-race
-            .register("/serviceWorker.js")
-            .then((res) => {
-              console.log("Serviceworker Started.");
-            })
-            .catch((error) => console.error("an Error has been occurred!"));
-        });
-      }
+      // window.addEventListener("load", () => {
+      //   if ("serviceWorker" in navigator) {
+      //     navigator.serviceWorker
+      //       // marble-race
+      //       .register("/serviceWorker.js")
+      //       .then((res) => {
+      //         console.log("Serviceworker Started.");
+      //       })
+      //       .catch((error) => console.error("an Error has been occurred!"));
+      //   }
+      // });
     </script>
   </body>
 </html>

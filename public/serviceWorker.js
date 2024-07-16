@@ -16,30 +16,31 @@ self.addEventListener("install", (e) => {
   );
 });
 
-self.addEventListener("fetch", (e) => {
-  e.respondWith(
-    caches.match(e.request).then((response) => {
-      if (response) {
-        return response;
-      } else {
-        return fetch(e.request);
-      }
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      // Even if the response is in the cache, we fetch it
+      // and update the cache for future usage
+      const fetchPromise = fetch(event.request)
+        .then((networkResponse) => {
+          return caches.open("assets").then((cache) => {
+            cache.put(event.request, networkResponse.clone());
+            return networkResponse;
+          });
+        })
+        .catch((e) => {
+          console.error(e);
+
+          return new Response(
+            "Network error and no cached data available. see the browser's console for more information",
+            {
+              status: 503,
+              statusText: "Service Unavailable.",
+            }
+          );
+        });
+      // We use the currently cached version if it's there
+      return response || fetchPromise; // cached or a network fetch
     })
   );
 });
-
-// self.addEventListener("fetch", (e) => {
-//     e.respondWith(
-//       caches.match(e.request).then((response) => {
-//         const fetchPromise = fetch(e.request).then((networkResponse) => {
-//           caches.open("assets").then((cache) => {
-//             cache.put(e.request, networkResponse.clone());
-
-//             return networkResponse;
-//           });
-//         });
-
-//         return response || fetchPromise;
-//       })
-//     );
-//   });
