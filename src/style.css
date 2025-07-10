@@ -12,6 +12,7 @@
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
   font-family: "Nunito", cursive;
+  overscroll-behavior: none;
 }
 
 .canvas {
@@ -130,6 +131,11 @@
   -webkit-border-radius: 0 0 10px 10px;
   -moz-border-radius: 0 0 10px 10px;
   border-radius: 0 0 10px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .interface .events {
@@ -180,6 +186,8 @@
   -o-transition: all 100ms ease-in-out;
   -moz-transition: all 100ms ease-in-out;
   transition: all 100ms ease-in-out;
+  font-size: 2rem;
+  color: white;
 }
 
 .interface .events .event-items:hover {
@@ -240,8 +248,8 @@
   -ms-transform: translateX(calc(100% + 2rem));
   -o-transform: translateX(calc(100% + 2rem));
   transform: translateX(calc(100% + 2rem));
-  padding: 0.5rem 2rem;
-  font-size: 3rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 2rem;
   background: #ffffff44;
   -webkit-border-radius: 0 10px 10px 0;
   -moz-border-radius: 0 10px 10px 0;
@@ -250,6 +258,7 @@
   border-left: none;
   cursor: pointer;
   pointer-events: auto;
+  color: white;
 }
 
 .interface .how-to__container.active {

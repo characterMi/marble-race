@@ -22,20 +22,22 @@ const Loader = () => {
 };
 
 const Scene = () => {
-  const level = useGame(state => state.level)
-  const setLevel = useGame(state => state.setLevel)
+  const level = useGame((state) => state.level);
+  const setLevel = useGame((state) => state.setLevel);
 
   useEffect(() => {
-    if (!localStorage.getItem('level')) {
-      localStorage.setItem('level', 1)
+    const storedLevel = Number(localStorage.getItem("level"));
+
+    if (isNaN(storedLevel) || storedLevel < 1) {
+      localStorage.setItem("level", 1);
     }
 
-    if (!!localStorage.getItem("level") && localStorage.getItem("level") == 16) {
-      localStorage.setItem("level", 1)
+    if (storedLevel > 20) {
+      localStorage.setItem("level", 20);
     }
 
-    setLevel()
-  }, [level, setLevel])
+    setLevel();
+  }, [level, setLevel]);
 
   return (
     <section className="canvas">
@@ -50,12 +52,13 @@ const Scene = () => {
       >
         <Canvas shadows camera={{ position: [2.5, 4, 6], fov: 55 }}>
           <Suspense fallback={<Loader />}>
-
             <Stars speed={0.2} count={2000} />
 
             <Physics>
               <Lights />
-              <Level count={level * 5 /* for each level, we add 5 more blocks */} />
+              <Level
+                count={level * 5 /* for each level, we add 5 more blocks */}
+              />
               <Player />
             </Physics>
           </Suspense>

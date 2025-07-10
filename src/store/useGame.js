@@ -33,10 +33,12 @@ export const useGame = create(
         return {};
       }),
 
+    zPosition: 0,
+    setZPosition: (z) => setState({ zPosition: z }),
+
     /**
      * Responsiveness
      */
-
     forwardBtn: false,
     backwardBtn: false,
     leftwardBtn: false,
