@@ -18,35 +18,29 @@ self.addEventListener("install", (e) => {
 
 self.addEventListener("fetch", (event) => {
   event.respondWith(
-    caches
-      .match(event.request) // searching in the cache
-      .then((response) => {
-        if (response) {
-          // The request is in the cache
-          return response; // cache hit
-        } else {
-          // We need to go to the network
-          const fetchPromise = fetch(event.request)
-            .then((networkResponse) => {
-              return caches.open("marble-race-game").then((cache) => {
-                cache.put(event.request, networkResponse.clone());
-                return networkResponse;
-              });
-            })
-            .catch((e) => {
-              console.error(e);
+    (async () => {
+      const cache = await caches.open("marble-race-game");
 
-              return new Response(
-                "Network error and no cached data available. see the browser's console for more information",
-                {
-                  status: 503,
-                  statusText: "Service Unavailable.",
-                }
-              );
-            });
+      const cachedResponse = await cache.match(event.request);
 
-          return fetchPromise; // cache miss
-        }
-      })
+      if (cachedResponse) return cachedResponse;
+
+      const fetchPromise = fetch(event.request)
+        .then((networkResponse) => {
+          cache.put(event.request, networkResponse.clone());
+          return networkResponse;
+        })
+        .catch(() => {
+          return new Response(
+            "Network error and no cached data available. see the browser's console for more information",
+            {
+              status: 503,
+              statusText: "Service Unavailable.",
+            }
+          );
+        });
+
+      return fetchPromise; // cache miss
+    })()
   );
 });
