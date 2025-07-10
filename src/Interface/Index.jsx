@@ -4,23 +4,26 @@ import { Sidebar } from "./Sidebar";
 import { Timer } from "./Timer";
 
 export const Interface = () => {
-  const { phase, restartGame, level, setActiveBtn } = useGame((state) => ({
-    phase: state.phase,
-    restartGame: state.restart,
-    level: state.level,
-    setActiveBtn: state.setActiveBtn,
-  }));
+  const { phase, restartGame, level, setActiveBtn, setLevel } = useGame(
+    (state) => ({
+      phase: state.phase,
+      restartGame: state.restart,
+      level: state.level,
+      setActiveBtn: state.setActiveBtn,
+      setLevel: state.setLevel,
+    })
+  );
 
   const handleNextLevel = () => {
     localStorage.setItem("level", +level + 1);
-
-    window.location.reload();
+    setLevel(+level + 1);
+    restartGame();
   };
 
   const handleSelectLevel = (level) => {
     localStorage.setItem("level", level.toString());
-
-    window.location.reload();
+    setLevel(+level);
+    restartGame();
   };
 
   const handleRestart = () => {
@@ -50,9 +53,18 @@ export const Interface = () => {
       <Timer />
 
       {/* Restart */}
-      <button className="restart-btn" onClick={restartGame}>
+      <div
+        onClick={handleRestart}
+        className="restart-btn"
+        onKeyDown={(e) => {
+          const isActiveElement = document.activeElement === e.currentTarget;
+          if (isActiveElement && e.key === "Enter") handleRestart();
+        }}
+        role="button"
+        tabIndex={0}
+      >
         Restart
-      </button>
+      </div>
 
       {/* Restart */}
       {phase === "ended" && (

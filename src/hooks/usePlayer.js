@@ -67,7 +67,9 @@ export const usePlayer = () => {
 
     const unsubscribeJump = subscribeKeys(
       (state) => state.jump,
-      (jump) => jump && jumpHandler()
+      (jump) => {
+        if (jump) jumpHandler();
+      }
     );
 
     const unsubscribeJumpBtn = useGame.subscribe(
@@ -82,24 +84,13 @@ export const usePlayer = () => {
 
     const unsubscribeAny = subscribeKeys(() => startGame());
 
-    const unsubscribeForwardBtn = useGame.subscribe(
-      (state) => state.forwardBtn,
-      (f) => f && startGame()
-    );
-
-    const unsubscribeBackwardBtn = useGame.subscribe(
-      (state) => state.backwardBtn,
-      (b) => b && startGame()
-    );
-
-    const unsubscribeLeftwardBtn = useGame.subscribe(
-      (state) => state.leftwardBtn,
-      (l) => l && startGame()
-    );
-
-    const unsubscribeRightwardBtn = useGame.subscribe(
-      (state) => state.rightwardBtn,
-      (r) => r && startGame()
+    const unsubscribeAnyBtn = useGame.subscribe(
+      (state) =>
+        state.forwardBtn ||
+        state.backwardBtn ||
+        state.leftwardBtn ||
+        state.rightwardBtn,
+      (btn) => btn && startGame()
     );
 
     return () => {
@@ -107,10 +98,7 @@ export const usePlayer = () => {
       unsubscribeJump();
       unsubscribeJumpBtn();
       unsubscribeAny();
-      unsubscribeForwardBtn();
-      unsubscribeBackwardBtn();
-      unsubscribeLeftwardBtn();
-      unsubscribeRightwardBtn();
+      unsubscribeAnyBtn();
     };
   }, []);
 
@@ -151,12 +139,11 @@ export const usePlayer = () => {
       body.current.applyTorqueImpulse(torque);
     }
 
-    setZPosition(Math.ceil(body.current.translation().z));
-
     /**
-     * Camera
+     * Camera & ball position
      */
     const bodyPosition = body.current.translation();
+    setZPosition(Math.ceil(bodyPosition.z));
 
     const cameraPosition = new Vector3();
     cameraPosition.copy(bodyPosition);

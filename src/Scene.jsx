@@ -30,14 +30,18 @@ const Scene = () => {
 
     if (isNaN(storedLevel) || storedLevel < 1) {
       localStorage.setItem("level", 1);
+      setLevel(1);
+      return;
     }
 
     if (storedLevel > 20) {
       localStorage.setItem("level", 20);
+      setLevel(20);
+      return;
     }
 
-    setLevel();
-  }, [level, setLevel]);
+    setLevel(storedLevel);
+  }, []);
 
   return (
     <section className="canvas">
@@ -54,7 +58,7 @@ const Scene = () => {
           <Suspense fallback={<Loader />}>
             <Stars speed={0.2} count={2000} />
 
-            <Physics>
+            <Physics key={level}>
               <Lights />
               <Level
                 count={level * 5 /* for each level, we add 5 more blocks */}
