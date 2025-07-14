@@ -7,9 +7,9 @@ const assets = [
   "/marble-race/icons/icon.svg",
   "/marble-race/icons/marble-192.png",
   "/marble-race/app.webmanifest",
-  "/marble-race/assets/index-43352c25.js",
+  "/marble-race/assets/index-cc21d2b4.js",
   "/marble-race/assets/index-c835803c.css",
-  "/marble-race//assets/troika-three-text.esm-632d2c5a.js",
+  "/marble-race/assets/troika-three-text.esm-e15f6e44.js",
 ];
 
 self.addEventListener("install", (e) => {
