@@ -48,6 +48,8 @@ export const usePlayer = () => {
   };
 
   const jumpHandler = () => {
+    if (phase === "ended") return;
+
     const origin = body.current.translation();
     origin.y -= 0.31;
     const direction = { x: 0, y: -1, z: 0 };

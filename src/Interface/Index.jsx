@@ -15,14 +15,16 @@ export const Interface = () => {
   );
 
   const handleNextLevel = () => {
-    localStorage.setItem("level", +level + 1);
-    setLevel(+level + 1);
+    const newLevel = level === 20 ? 1 : level + 1;
+
+    localStorage.setItem("level", newLevel);
+    setLevel(newLevel);
     restartGame();
   };
 
-  const handleSelectLevel = (level) => {
-    localStorage.setItem("level", level.toString());
-    setLevel(+level);
+  const handleSelectLevel = (newLevel) => {
+    localStorage.setItem("level", newLevel);
+    setLevel(+newLevel);
     restartGame();
   };
 
